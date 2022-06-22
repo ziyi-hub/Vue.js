@@ -1,0 +1,41 @@
+<!-- Créer une boite "Debug en posision fixe dans un coin du document -->
+<!-- Ajouter un bouton qui permet de déplacer la boite dans les 4 coins -->
+
+<!DOCTYPE html>
+<html lang=fr>
+<head>
+    <meta charset="UTF-8">
+    <title>Ma premiere page avec Vue.js 3</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="container">
+    <h1>Communication avec le composant</h1>
+    <p>Etat de vue.js {{ vueStatus }}</p>
+    <h3>Ajuster une icone de volume à l'aide d'un component</h3>
+    <label>Sound label</label>
+    <input type="number" min="0" max="3" v-model.number="soundLevel" />
+
+    <p v-if="newUserMood.length">
+        Vous vous sentez plutôt : {{newUserMood}}
+    </p>
+
+    <soundicon ref="soundmodule" v-bind:level="soundLevel"
+               v-on:volcoupe="muteVol"
+               v-on:volfond="volfond"
+               v-on:newmood="setmood"
+    ></soundicon>
+
+    <h3>Affichage une message d'alerte si le volume est au max</h3>
+    <p v-if="soundLevel === 3" style="font-size:3em;">
+        Alert ! Votre volume est au maximum
+    </p>
+
+</div>
+<script src="vue-3ed-composant.js"></script>
+
+</body>
+</html>

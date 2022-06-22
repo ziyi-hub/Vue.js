@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang=fr>
+<head>
+    <meta charset="UTF-8">
+    <title>Ma premiere page avec Vue.js 3</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="container">
+        <h1>Valeur calculée</h1>
+        <input type="text" v-model="name">&nbsp;
+        <input type="text" v-model="surName">
+        <p>Le nom complet est : {{nomComplet}}</p>
+    </div>
+    <script>
+        const myVueApp = {
+            data(){
+                return{
+                    name : "Ziyi",
+                    surName : "Wang"
+                }
+            },
+
+            methods : {
+                //c'est ici qu'on écrit toutes les fonctions utiles
+
+            },
+
+            computed : {
+                //section ou on effectuer les calculs à réaliser quand l'éveénement onDOMready est ok
+                /**
+                 * Cette fonction doit retourner une valeur calculeée à partir d'autres variables disponibles dans l'instance de vue
+                 * @param : {string} name = nom, {string} surName = prenom
+                 * @return : {string} la concatenation des 2 params
+                 */
+                nomComplet(){
+                    return this.name + " " + this.surName
+                }
+            }
+        }
+
+        Vue.createApp(myVueApp).mount("#container")
+    </script>
+
+</body>
+</html>

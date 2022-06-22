@@ -1,0 +1,78 @@
+<!-- Créer une boite "Debug en posision fixe dans un coin du document -->
+<!-- Ajouter un bouton qui permet de déplacer la boite dans les 4 coins -->
+
+<!DOCTYPE html>
+<html lang=fr>
+<head>
+    <meta charset="UTF-8">
+    <title>Ma premiere page avec Vue.js 3</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="container">
+    <h1>Mon premier composant</h1>
+
+    <p>Etat de Vue.js : {{ vueStatus }}</p>
+
+    <button-counter></button-counter>
+
+    <p>
+        Le Lorem Ipsum est simplement du faux texte employé dans la composition
+        et la mise en page avant impression. Le Lorem Ipsum est le faux texte
+        standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme
+        assembla ensemble des morceaux de texte pour réaliser un livre spécimen de
+        polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est
+        aussi adapté à la bureautique informatique, sans que son contenu n'en soit
+        modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles
+        Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son
+        inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.
+        Le Lorem Ipsum est simplement du faux texte employé dans la composition et
+        la mise en page avant impression.
+    </p>
+
+    <button-counter></button-counter>
+
+</div>
+<script>
+     // Il faut créer l'instancee de vue avantde edéclarer les components
+     const  myVueApp = Vue.createApp({
+        data(){
+            return{
+                vueStatus : "ok"
+            }
+        }
+        ,
+        methods : {
+
+        },
+
+        computed : {
+
+        }
+    })
+
+    //On définit un nouveau composant global appelé button-counter
+    myVueApp.component('button-counter', {
+        data(){
+            return{
+                count : 0
+            }
+        },
+
+        template : `
+            <button v-on:click="count++">
+              Vous m'avez clique {{count}} fois
+            </button>
+
+        `
+
+    })
+
+    myVueApp.mount("#container")
+</script>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!-- Créer une boite "Debug en posision fixe dans un coin du document -->
+<!-- Ajouter un bouton qui permet de déplacer la boite dans les 4 coins -->
+
+<!DOCTYPE html>
+<html lang=fr>
+<head>
+    <meta charset="UTF-8">
+    <title>Ma premiere page avec Vue.js 3</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="container">
+        <h1>Filteer un tableau avec computed</h1>
+        <h2>Liste complète des expériences</h2>
+        <ul>
+            <li v-for="experiment in experiments">
+                {{experiment.name}} ({{experiment.cost}}$) - {{experiment.field}}
+            </li>
+        </ul>
+
+        <h2>Liste des expériences sauf "Physic"</h2>
+        <ul>
+            <li v-for="experiment in filteredExperimentsNonPhysic">
+                {{experiment.name}} ({{experiment.cost}}$) - {{experiment.field}}
+            </li>
+        </ul>
+
+        <div v-if="filter === 'physic'">
+            <h2>Affichage dynamique</h2>
+            <ul>
+                <li v-for="experiment in filteredExperimentsBoutons">
+                    {{experiment.name}} ({{experiment.cost}}$) - {{experiment.field}}
+                </li>
+            </ul>
+        </div>
+
+        <div v-if="filter === 'bilogie'">
+            <h2>Affichage dynamique</h2>
+            <ul>
+                <li v-for="experiment in filteredExperimentsBoutons">
+                    {{experiment.name}} ({{experiment.cost}}$) - {{experiment.field}}
+                </li>
+            </ul>
+        </div>
+
+        <div v-if="filter === 'cout'">
+            <h2>Affichage dynamique</h2>
+            <ul>
+                <li v-for="experiment in filteredExperimentsBoutons">
+                    {{experiment.name}} ({{experiment.cost}}$) - {{experiment.field}}
+                </li>
+            </ul>
+        </div>
+
+        <button v-on:click="clicPhysic">Affichage de Physique</button>
+        <button v-on:click="clicBilogie">Affichage de Bilogie</button>
+        <button v-on:click="clicCout">Côut > 100 M</button>
+
+
+    </div>
+    <script>
+        const myVueApp = {
+            data(){
+                return{
+                    experiments : [
+                        {name: 'Accelerateur', cost:650, field: 'Physique'},
+                        {name: 'Observator', cost:100, field: 'Bilogie'},
+                        {name: 'Viloniste dans le métro', cost:2, field: 'Psychologie'},
+                        {name: 'Accélérateur de particulies', cost:35, field: 'Physique'},
+                        {name: 'Sateleite Téléscope', cost:453, field: 'Physique'}
+                    ],
+                    filter : "physic",
+                }
+            }
+            ,
+            methods : {
+                //c'est ici qu'on eécrit toutes les fonctions utiles
+                nonPhysic(list){
+                    return list.filter(exp => exp.field !== "Physique" )
+                },
+
+                clicPhysic(){
+                    this.filter = "physic"
+                },
+
+                clicBilogie(){
+                    this.filter = "bilogie"
+                },
+
+                clicCout(){
+                    this.filter = "cout"
+                },
+
+                Affichage(list){
+                    if (this.filter === "physic"){
+                        return list.filter(exp => exp.field === "Physique" )
+                    }else if (this.filter === "bilogie"){
+                        return list.filter(exp => exp.field === "Bilogie" )
+                    }else if (this.filter === "non physic"){
+                        return list.filter(exp => exp.field !== "Physique" )
+                    }else if(this.filter === "cout"){
+                        return list.filter(exp => exp.cost > 100 )
+                    }
+                },
+
+            },
+
+            computed : {
+                filteredExperimentsNonPhysic(){
+                    return this.nonPhysic(this.experiments)
+                },
+
+                filteredExperimentsBoutons(){
+                    return this.Affichage(this.experiments)
+                },
+
+            }
+        }
+
+        Vue.createApp(myVueApp).mount("#container")
+    </script>
+
+</body>
+</html>

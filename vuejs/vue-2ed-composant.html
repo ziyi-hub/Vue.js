@@ -1,0 +1,33 @@
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>Utiliser les components</title>
+
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+
+<body>
+<div id="container">
+    <h1>Utiliser les components</h1>
+
+    <p>Etat de Vue.js : {{vueStatus}}</p>
+
+    <h4>Une autre liste de tache</h4>
+
+    <mylist finished="false" priorite="1">faire à manger</mylist>
+    <mylist finished="true" priorite="3">Réparer les volets</mylist>
+    <mylist finished="false" priorite="2">Changer le verrou</mylist>
+    <mylist finished="true" priorite="3">Prendre de la menthe dans le jardin</mylist>
+    <mylist finished="false" priorite="3">Offrir des fleurs</mylist>
+
+    <h4>Liste de tâches avec template</h4>
+
+    <task-list></task-list>
+
+</div>
+
+<script src="vue-2ed-composant.js"></script>
+
+</body>

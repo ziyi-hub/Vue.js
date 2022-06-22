@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang=fr>
+<head>
+    <meta charset="UTF-8">
+    <title>gérer une liste de tâche</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        .rouge{color: red;}
+        .task-complete{ color: darkgray; text-decoration: line-through; }
+        .istrue{color: darkgreen;}
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Gérer une liste de tâche</h1>
+        <p>créer la tache d'un tableau, une liste de tache comprenne
+            une libellé et un boolean, indique si elle est complète ou non<br>
+        </p>
+        <p>ajouter une style texte gris barré pour chaque tache complete</p>
+        <p>ajouter un bouton devant chaque elements pour compléter / décompléter la tâche</p>
+
+        <div v-if="masquerTache">
+            <h4>Liste de toutes les taches</h4>
+            <ul>
+                <li v-for="task in filteredTache">
+                    <button v-on:click="changeStatus(task)">on/off</button>&nbsp
+                    <input type="checkbox" v-model="task.completed">
+                    <span v-bind:class="{'task-complete' : task.completed}">
+                        {{task.description}} - {{task.completed}}
+                    </span>
+                </li>
+            </ul>
+        </div>
+
+        <div v-else>
+            <h4>Liste de toutes les taches</h4>
+            <ul>
+                <li v-for="task in tasks">
+                    <button v-on:click="changeStatus(task)">on/off</button>&nbsp
+                    <input type="checkbox" v-model="task.completed">
+                    <span v-bind:class="{'task-complete' : task.completed}">
+                        {{task.description}} - {{task.completed}}
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <button v-on:click="clickMasquer">masquer</button>&nbsp
+
+
+
+    </div>
+    <script>
+        const myVueApp = {
+            data(){
+                return{
+                    tasks : [
+                        {description : "Faire les courses", completed : true},
+                        {description : "Terminer cet exerrcice", completed : false},
+                        {description : "Faire un don sur Ulule", completed : true},
+                        {description : "Tirer mon disque dur", completed : false},
+                        {description : "Faire à mangers", completed : false},
+                    ],
+                    masquerTache : true,
+                }
+            }
+            ,
+
+
+            methods : {
+                clickMasquer(){
+                    this.masquerTache = !this.masquerTache
+                },
+
+                changeStatus(task){
+                    task.completed = !task.completed;
+                },
+
+                masquer(tache){
+                    return tache.filter( exp => exp.completed === false )
+                }
+
+            },
+
+            computed : {
+                filteredTache(){
+                    return this.masquer(this.tasks)
+                },
+            }
+        }
+
+        Vue.createApp(myVueApp).mount("#container")
+    </script>
+
+</body>
+</html>
